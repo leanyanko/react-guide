@@ -12,7 +12,7 @@ class App extends Component {
       {name:"Manu", age:29},
       {name:"Stephanie", age:26}
     ],
-    username: 'Anna'
+  //  username: 'Anna'
   }
 
   // switchNameHandler = (newName) => {
@@ -20,7 +20,7 @@ class App extends Component {
   //   //this.state.persons[0].name = 'Maximilian';
   //   this.setState({
   //     persons: [
-  //       {name:newName, age:28},
+  //       {name: newName, age:28},
   //       {name:"Manu", age:29},
   //       {name:"Stephanie", age:27}
   //     ]//,
@@ -28,34 +28,50 @@ class App extends Component {
   //   })
   // }
 
-  switchNameHandler = (event) => {
-    this.setState({
+  switchNameHandler = ( newName ) => {
+    // console.log('Was clicked!');
+    // DON'T DO THIS: this.state.persons[0].name = 'Maximilian';
+    this.setState( {
       persons: [
-        {name:"Max", age:28},
-        {name:event.target.value, age:29},
-        {name:"Stephanie", age:26}
-      ],
-      username: "Anna"
-    })
+        { name: newName, age: 28 },
+        { name: 'Manu', age: 29 },
+        { name: 'Stephanie', age: 27 }
+      ]
+    } )
   }
 
-  //switch
+  nameChangedHandler = ( event ) => {
+    this.setState( {
+      persons: [
+        { name: 'Max', age: 28 },
+        { name: event.target.value, age: 29 },
+        { name: 'Stephanie', age: 26 }
+      ]
+    } )
+  }
+
+  // switchUsername = (event) => {
+  //   this.setState({username: event.target.value});
+  // }
 
   render() {
     const style = {
+      width:'60%',
+      margin: '16px auto',
       backgroundColor: 'white',
       font: 'inherit',
       border: '1px solid blue',
+      boxShadow: '0 2px 3px #f6f',
       padding: '8px',
       cursor: 'pointer'
     };
 
     return (
       <div className="App">
-        <h1> HI, I am react </h1>
+        <h1 style={style}> HI, I am react </h1>
         <button 
         style={style}
-       // onClick={() => this.switchNameHandler('Maximilian!!')}
+         onClick={() => this.switchNameHandler('Maximilian!!')}
         >Switch name </button>
         <Person 
           name={this.state.persons[0].name} 
@@ -64,14 +80,16 @@ class App extends Component {
           name={this.state.persons[1].name} 
           age={this.state.persons[1].age}
          // click={this.switchNameHandler.bind(this, 'Max!')}
-          changed={this.switchNameHandler}/>
+          changed={this.nameChangedHandler}/>
         <Person 
           name={this.state.persons[2].name} 
           age={this.state.persons[2].age}/>
-
+        {/* <UserInput 
+          currentName = {this.state.username}
+          changed={this.switchUsername}/>
         <UserOutput username={this.state.username}/>
         <UserOutput/>
-        <UserOutput/>
+        <UserOutput/> */}
       </div>
     );
     //return React.createElement('div', {className: 'App'}, React.createElement('h1', null, ' HI, I am react'));
